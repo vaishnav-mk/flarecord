@@ -2,13 +2,9 @@ import {
   DiscordClient,
   GatewayIntents,
   MessageHelper,
-  EmbedBuilder,
-  ButtonBuilder,
-  ActionRowBuilder,
-  ButtonStyle,
-  Colors,
-} from "flarecord/src";
-import type { ReadyData, MessageData } from "flarecord/src";
+  type ReadyData,
+  type MessageData,
+} from "flarecord";
 import type { DurableObjectState } from "@cloudflare/workers-types";
 import { DurableObject } from "cloudflare:workers";
 
@@ -43,9 +39,9 @@ export class TestBot extends DurableObject<Env> {
   }
 
   private onReady(data: ReadyData) {
-    console.log(`✅ Bot ready: ${data.user.username}#${data.user.discriminator}`);
-    console.log(`   Bot ID: ${data.user.id}`);
-    console.log(`   Session ID: ${data.session_id}`);
+    console.log(`Bot ready: ${data.user.username}#${data.user.discriminator}`);
+    console.log(`Bot ID: ${data.user.id}`);
+    console.log(`Session ID: ${data.session_id}`);
     this.messageHelper = new MessageHelper(this.client.getToken());
   }
 
@@ -78,49 +74,63 @@ export class TestBot extends DurableObject<Env> {
     if (content === "!ping") {
       this.messageHelper.send(channelId, "Pong! 🏓");
     } else if (content === "!test") {
-      const embed = new EmbedBuilder()
-        .setTitle("Test Bot")
-        .setDescription("Everything is working correctly!")
-        .setColor(Colors.Green)
-        .setTimestamp();
+      const embed = {
+        title: "Test Bot",
+        description: "Everything is working correctly!",
+        color: 0x00ff00,
+        timestamp: new Date().toISOString(),
+      };
       this.messageHelper.send(channelId, embed);
     } else if (content === "!button") {
-      const button = new ButtonBuilder()
-        .setCustomId("test_button")
-        .setLabel("Click Me!")
-        .setStyle(ButtonStyle.Primary);
-      const row = new ActionRowBuilder().addComponents(button);
+      const button = {
+        type: 2,
+        style: 1,
+        custom_id: "test_button",
+        label: "Click Me!",
+      };
+      const row = {
+        type: 1,
+        components: [button],
+      };
       this.messageHelper.send(channelId, row);
     } else if (content === "!combined") {
-      const embed = new EmbedBuilder()
-        .setTitle("Combined Test")
-        .setDescription("Embed + Button working!")
-        .setColor(Colors.Purple);
-      const button = new ButtonBuilder()
-        .setCustomId("combined_test")
-        .setLabel("Test Button")
-        .setStyle(ButtonStyle.Success);
-      const row = new ActionRowBuilder().addComponents(button);
+      const embed = {
+        title: "Combined Test",
+        description: "Embed + Button working!",
+        color: 0x9b59b6,
+      };
+      const button = {
+        type: 2,
+        style: 3,
+        custom_id: "combined_test",
+        label: "Test Button",
+      };
+      const row = {
+        type: 1,
+        components: [button],
+      };
       this.messageHelper.send(channelId, [embed, row]);
     } else if (content === "!help") {
-      const embed = new EmbedBuilder()
-        .setTitle("Test Bot Commands")
-        .setDescription("Available commands:")
-        .addFields(
+      const embed = {
+        title: "Test Bot Commands",
+        description: "Available commands:",
+        fields: [
           { name: "!ping", value: "Test basic message", inline: true },
           { name: "!test", value: "Test embed", inline: true },
           { name: "!button", value: "Test button", inline: true },
           { name: "!combined", value: "Test embed + button", inline: true },
-          { name: "!help", value: "Show this help", inline: true }
-        )
-        .setColor(Colors.Blue)
-        .setTimestamp();
+          { name: "!help", value: "Show this help", inline: true },
+        ],
+        color: 0x3498db,
+        timestamp: new Date().toISOString(),
+      };
       this.messageHelper.send(channelId, embed);
     } else if (content.startsWith("!reply") && messageId) {
-      const embed = new EmbedBuilder()
-        .setTitle("Reply Test")
-        .setDescription("This is a reply!")
-        .setColor(Colors.Orange);
+      const embed = {
+        title: "Reply Test",
+        description: "This is a reply!",
+        color: 0xff9500,
+      };
       this.messageHelper.reply(channelId, messageId, guildId, embed);
     }
   }
