@@ -1,0 +1,103 @@
+export enum GatewayOpcode {
+  DISPATCH = 0,
+  HEARTBEAT = 1,
+  IDENTIFY = 2,
+  PRESENCE_UPDATE = 3,
+  VOICE_STATE_UPDATE = 4,
+  RESUME = 6,
+  RECONNECT = 7,
+  REQUEST_GUILD_MEMBERS = 8,
+  INVALID_SESSION = 9,
+  HELLO = 10,
+  HEARTBEAT_ACK = 11,
+}
+
+export enum GatewayEvent {
+  READY = "READY",
+  RESUMED = "RESUMED",
+  MESSAGE_CREATE = "MESSAGE_CREATE",
+  MESSAGE_UPDATE = "MESSAGE_UPDATE",
+  MESSAGE_DELETE = "MESSAGE_DELETE",
+  INTERACTION_CREATE = "INTERACTION_CREATE",
+  GUILD_CREATE = "GUILD_CREATE",
+  GUILD_UPDATE = "GUILD_UPDATE",
+  GUILD_DELETE = "GUILD_DELETE",
+}
+
+/**
+ * Discord Gateway Intents
+ * @see https://discord.com/developers/docs/topics/gateway#gateway-intents
+ */
+export enum GatewayIntents {
+  GUILDS = 1 << 0,
+  GUILD_MEMBERS = 1 << 1,
+  GUILD_MODERATION = 1 << 2,
+  GUILD_EMOJIS_AND_STICKERS = 1 << 3,
+  GUILD_INTEGRATIONS = 1 << 4,
+  GUILD_WEBHOOKS = 1 << 5,
+  GUILD_INVITES = 1 << 6,
+  GUILD_VOICE_STATES = 1 << 7,
+  GUILD_PRESENCES = 1 << 8,
+  GUILD_MESSAGES = 1 << 9,
+  GUILD_MESSAGE_REACTIONS = 1 << 10,
+  GUILD_MESSAGE_TYPING = 1 << 11,
+  DIRECT_MESSAGES = 1 << 12,
+  DIRECT_MESSAGE_REACTIONS = 1 << 13,
+  DIRECT_MESSAGE_TYPING = 1 << 14,
+  MESSAGE_CONTENT = 1 << 15,
+  GUILD_SCHEDULED_EVENTS = 1 << 16,
+  AUTO_MODERATION_CONFIGURATION = 1 << 20,
+  AUTO_MODERATION_EXECUTION = 1 << 21,
+  GUILD_MESSAGE_POLLS = 1 << 24,
+  DIRECT_MESSAGE_POLLS = 1 << 25,
+}
+
+export enum WebSocketCloseCode {
+  NORMAL_CLOSURE = 1000,
+  GOING_AWAY = 1001,
+  PROTOCOL_ERROR = 1002,
+  UNSUPPORTED_DATA = 1003,
+  NO_STATUS_RECEIVED = 1005,
+  ABNORMAL_CLOSURE = 1006,
+  INVALID_FRAME_PAYLOAD = 1007,
+  POLICY_VIOLATION = 1008,
+  MESSAGE_TOO_BIG = 1009,
+  MISSING_EXTENSION = 1010,
+  INTERNAL_ERROR = 1011,
+  SERVICE_RESTART = 1012,
+  TRY_AGAIN_LATER = 1013,
+  BAD_GATEWAY = 1014,
+  TLS_HANDSHAKE = 1015,
+  UNAUTHENTICATED = 4000,
+  INVALID_API_VERSION = 4001,
+  INVALID_INTENTS = 4002,
+  DISALLOWED_INTENTS = 4003,
+}
+
+export const RESUMEABLE_CLOSE_CODES = [
+  WebSocketCloseCode.NORMAL_CLOSURE,
+  WebSocketCloseCode.GOING_AWAY,
+  WebSocketCloseCode.ABNORMAL_CLOSURE,
+  WebSocketCloseCode.NO_STATUS_RECEIVED,
+];
+
+export const GATEWAY_BASE_URL = "https://discord.com/api/v10/gateway/bot";
+export const GATEWAY_VERSION = 10;
+export const GATEWAY_ENCODING = "json";
+
+export const WEBSOCKET_READY_STATE_OPEN = 1;
+export const DEFAULT_STORAGE_KEY = "gatewayState";
+export const DEFAULT_MAX_RECONNECT_ATTEMPTS = 5;
+
+export const DEFAULT_RECONNECT_DELAYS = {
+  initial: 1000,
+  max: 60000,
+  backoffMultiplier: 2,
+};
+
+export const DEFAULT_IDENTIFY_PROPERTIES = {
+  os: "cloudflare-workers",
+  browser: "discord-gateway",
+  device: "discord-gateway",
+};
+
