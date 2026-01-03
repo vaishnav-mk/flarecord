@@ -8,29 +8,13 @@ discord gateway client for cloudflare workers. built with typescript and optimiz
 npm install flarecord
 ```
 
-## using source files directly
-
-if you encounter bundling issues with the compiled version, you can import directly from the source files:
+## import
 
 ```typescript
-// import from source (recommended for cloudflare workers)
-import { DiscordClient, GatewayIntents, MessageHelper } from "flarecord/src";
-
-// or import specific modules
-import { DiscordClient } from "flarecord/src/core/client";
-import { MessageHelper } from "flarecord/src/utils/message-helper";
+import { DiscordClient, GatewayIntents, MessageHelper } from "flarecord";
 ```
 
-**when to use source files:**
-- cloudflare workers projects (handles typescript natively)
-- when you need to avoid bundling issues
-- when you want to use the latest source code
-
-**when to use compiled version:**
-- standard node.js projects
-- when you prefer pre-compiled javascript
-
-the source files are included in the npm package, so both options work without additional configuration.
+flarecord uses source files by default for cloudflare workers.
 
 ## how it works
 
@@ -55,7 +39,6 @@ the library handles all the complexity of the discord gateway protocol automatic
 - interaction events
 - all discord gateway events
 - typescript support
-- discord.js compatible builders (embeds, buttons, etc)
 
 ## example
 
@@ -143,7 +126,7 @@ available intents: GUILDS, GUILD_MEMBERS, GUILD_MODERATION, GUILD_EMOJIS_AND_STI
 use `MessageHelper` to send messages, embeds, buttons, and more:
 
 ```typescript
-import { MessageHelper, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } from "flarecord";
+import { MessageHelper } from "flarecord";
 
 const helper = new MessageHelper(token);
 
@@ -151,18 +134,24 @@ const helper = new MessageHelper(token);
 await helper.send(channelId, "hello!");
 
 // send embed
-const embed = new EmbedBuilder()
-  .setTitle("title")
-  .setDescription("description")
-  .setColor(0x00ff00);
+const embed = {
+  title: "title",
+  description: "description",
+  color: 0x00ff00,
+};
 await helper.send(channelId, embed);
 
 // send button
-const button = new ButtonBuilder()
-  .setCustomId("button_id")
-  .setLabel("click me")
-  .setStyle(ButtonStyle.Primary);
-const row = new ActionRowBuilder().addComponents(button);
+const button = {
+  type: 2,
+  style: 1,
+  custom_id: "button_id",
+  label: "click me",
+};
+const row = {
+  type: 1,
+  components: [button],
+};
 await helper.send(channelId, row);
 
 // reply to message
