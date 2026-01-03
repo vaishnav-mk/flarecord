@@ -7,8 +7,8 @@ import {
   ActionRowBuilder,
   ButtonStyle,
   Colors,
-} from "flarecord";
-import type { ReadyData, MessageData } from "flarecord";
+} from "flarecord/src";
+import type { ReadyData, MessageData } from "flarecord/src";
 import type { DurableObjectState } from "@cloudflare/workers-types";
 import { DurableObject } from "cloudflare:workers";
 
