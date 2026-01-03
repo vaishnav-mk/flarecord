@@ -1,4 +1,4 @@
-# flarecord
+# flarecord 🌥️
 
 discord gateway client for cloudflare workers. built with typescript and optimized for durable objects.
 
@@ -7,6 +7,30 @@ discord gateway client for cloudflare workers. built with typescript and optimiz
 ```bash
 npm install flarecord
 ```
+
+## using source files directly
+
+if you encounter bundling issues with the compiled version, you can import directly from the source files:
+
+```typescript
+// import from source (recommended for cloudflare workers)
+import { DiscordClient, GatewayIntents, MessageHelper } from "flarecord/src";
+
+// or import specific modules
+import { DiscordClient } from "flarecord/src/core/client";
+import { MessageHelper } from "flarecord/src/utils/message-helper";
+```
+
+**when to use source files:**
+- cloudflare workers projects (handles typescript natively)
+- when you need to avoid bundling issues
+- when you want to use the latest source code
+
+**when to use compiled version:**
+- standard node.js projects
+- when you prefer pre-compiled javascript
+
+the source files are included in the npm package, so both options work without additional configuration.
 
 ## how it works
 

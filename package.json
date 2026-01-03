@@ -1,7 +1,39 @@
 {
   "name": "flarecord",
   "version": "0.0.1",
+  "description": "discord gateway client for cloudflare workers. built with typescript and optimized for durable objects.",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "source": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./src": "./src/index.ts",
+    "./src/*": "./src/*"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaishnav-mk/flarecord.git"
+  },
+  "keywords": [
+    "discord",
+    "discord-bot",
+    "discord-gateway",
+    "cloudflare",
+    "cloudflare-workers",
+    "durable-objects",
+    "websocket",
+    "typescript"
+  ],
+  "author": "vaishnav-mk",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
