@@ -1,0 +1,19 @@
+{
+  "name": "flarecord-test-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "discord-api-types": "^0.38.37",
+    "discord.js": "^14.25.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260103.0",
+    "typescript": "^5.5.2",
+    "wrangler": "^4.54.0"
+  }
+}
