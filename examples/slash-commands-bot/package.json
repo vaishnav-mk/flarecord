@@ -1,0 +1,21 @@
+{
+  "name": "flarecord-slash-commands-bot",
+  "version": "1.13.1",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "@discordjs/builders": "^1.13.1",
+    "discord-api-types": "^0.38.37",
+    "flarecord": "^0.0.3"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260103.0",
+    "typescript": "^5.5.2",
+    "wrangler": "^4.54.0"
+  }
+}
+

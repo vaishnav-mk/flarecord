@@ -1,0 +1,25 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "flarecord-slash-commands-bot",
+	"main": "src/index.ts",
+	"compatibility_date": "2024-12-01",
+	"compatibility_flags": ["nodejs_compat"],
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "SLASH_COMMANDS_BOT",
+				"class_name": "SlashCommandsBot"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_classes": ["SlashCommandsBot"]
+		}
+	],
+	"vars": {
+		"DISCORD_BOT_TOKEN": "YOUR_BOT_TOKEN_HERE"
+	}
+}
+
